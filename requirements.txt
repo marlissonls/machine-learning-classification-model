@@ -1,0 +1,7 @@
+config
+praw
+numpy
+scikit-learn
+matplotlib
+seaborn
+python-dotenv
