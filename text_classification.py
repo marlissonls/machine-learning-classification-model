@@ -21,7 +21,7 @@ import seaborn as sns
 
 dotenv.load_dotenv()
 
-## Carrega os dados
+## Load data
 assuntos = ['datascience', 'machinelearning', 'physics', 'astrology', 'conspiracy', ]
 
 def carrega_dados():
@@ -55,7 +55,7 @@ def carrega_dados():
     return data, labels
 
 
-## Divisão dos dados em treino e teste
+## Split data into train and test
 
 TEST_SIZE = .2
 RANDOM_STATE = 0
@@ -69,3 +69,23 @@ def split_data():
     print(f'{len(y_teste)} amostras de teste')
 
     return X_treino, X_teste, y_treino, y_teste
+
+
+## Data Preprocessing and Attribute Extraction
+
+MIN_DOC_FREQ = 1
+N_COMPONENTS = 1000
+N_ITER = 30
+
+def preprocessing_pipeline():
+
+    pattern = r'\W|\d|http.*\s+|www.*\s+'
+    preprocessor = lambda text: re.sub(pattern, ' ', text)
+
+    vectorizer = TfidfVectorizer(preprocessor = preprocessor, stop_words = 'english', min_df = MIN_DOC_FREQ)
+
+    decomposition = TruncatedSVD(n_components = N_COMPONENTS, n_iter = N_ITER)
+
+    pipeline = [('tfidf', vectorizer), ('svd', decomposition)]
+
+    return pipeline
