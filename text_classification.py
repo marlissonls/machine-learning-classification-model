@@ -21,7 +21,7 @@ import seaborn as sns
 
 dotenv.load_dotenv()
 
-
+## Carrega os dados
 assuntos = ['datascience', 'machinelearning', 'physics', 'astrology', 'conspiracy', ]
 
 def carrega_dados():
@@ -49,7 +49,23 @@ def carrega_dados():
         labels.extend([i] * len(posts))
 
         print(f'Número de posts do assunto r/{assunto}: {len(posts)}',
-              f'\nUn dos posts extráidos: {posts[0][:600]}...\n',
+              f'\nUm dos posts extráidos: {posts[0][:600]}...\n',
               "_" * 80 + '\n')
     
     return data, labels
+
+
+## Divisão dos dados em treino e teste
+
+TEST_SIZE = .2
+RANDOM_STATE = 0
+
+def split_data():
+
+    print(f'Split {100 * TEST_SIZE}% dos dados para treinamento e avaliação do modelo...')
+
+    X_treino, X_teste, y_treino, y_teste = train_test_split(data, labels, teste_size = TEST_SIZE, random_state=RANDOM_STATE)
+
+    print(f'{len(y_teste)} amostras de teste')
+
+    return X_treino, X_teste, y_treino, y_teste
