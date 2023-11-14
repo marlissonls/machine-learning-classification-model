@@ -11,3 +11,16 @@
 - KNN
 - Random Forest
 - Logistic Regression
+
+
+### This project aims to create 3 machine learning models to classify posts on the Reddit website into 5 themes:
+- datascience
+- machinelearning
+- physics
+- astrology
+- conspiracy
+
+### The models used are:
+- KNN
+- Random Forest
+- Logistic Regression
