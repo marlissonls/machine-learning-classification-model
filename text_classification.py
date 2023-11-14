@@ -15,7 +15,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 
@@ -62,9 +62,9 @@ RANDOM_STATE = 0
 
 def split_data(data, labels):
 
-    print(f'Split {100 * TEST_SIZE}% dos dados para treinamento e avaliação do modelo...')
+    print(f'Split {100 * TEST_SIZE}% dos dados para teste e avaliação do modelo...')
 
-    X_treino, X_teste, y_treino, y_teste = train_test_split(data, labels, teste_size = TEST_SIZE, random_state = RANDOM_STATE)
+    X_treino, X_teste, y_treino, y_teste = train_test_split(data, labels, test_size = TEST_SIZE, random_state = RANDOM_STATE)
 
     print(f'{len(y_teste)} amostras de teste')
 
@@ -125,7 +125,7 @@ def treina_avalia(modelos, pipeline, X_treino, X_teste, y_treino, y_teste):
         report = classification_report(y_teste, y_pred)
         print('Relatório de Classificação\n', report)
 
-        resultados.append([modelo, {'modelo': name, 'previsoes': y_pred, 'report': report}])
+        resultados.append([modelo, {'model': name, 'predictions': y_pred, 'report': report}])
     
     return resultados
 
