@@ -60,11 +60,11 @@ def carrega_dados():
 TEST_SIZE = .2
 RANDOM_STATE = 0
 
-def split_data():
+def split_data(data, labels):
 
     print(f'Split {100 * TEST_SIZE}% dos dados para treinamento e avaliação do modelo...')
 
-    X_treino, X_teste, y_treino, y_teste = train_test_split(data, labels, teste_size = TEST_SIZE, random_state=RANDOM_STATE)
+    X_treino, X_teste, y_treino, y_teste = train_test_split(data, labels, teste_size = TEST_SIZE, random_state = RANDOM_STATE)
 
     print(f'{len(y_teste)} amostras de teste')
 
@@ -128,3 +128,20 @@ def treina_avalia(modelos, pipeline, X_treino, X_teste, y_treino, y_teste):
         resultados.append([modelo, {'modelo': name, 'previsoes': y_pred, 'report': report}])
     
     return resultados
+
+
+## Pipeline execution for all models
+
+if __name__ == '__main__':
+
+    data, labels = carrega_dados()
+
+    X_treino, X_teste, y_treino, y_teste = split_data(data, labels)
+
+    pipeline = preprocessing_pipeline()
+
+    all_models = criar_modelos()
+
+    resultados = treina_avalia(all_models, pipeline, X_treino, X_teste, y_treino, y_teste)
+
+print('Concluído com sucesso!')
