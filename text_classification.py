@@ -105,3 +105,26 @@ def criar_modelos():
     modelos = [('KNN', modelo_1), ('RandomForest', modelo_2), ('LogReg', modelo_3)]
 
     return modelos
+
+
+## Models training and evaluation
+
+def treina_avalia(modelos, pipeline, X_treino, X_teste, y_treino, y_teste):
+
+    resultados = []
+
+    for name, modelo in modelos:
+
+        pipe = Pipeline(pipeline + [(name, modelo)])
+
+        print(f'Treinando o modelo {name} com dados do treino...')
+        pipe.fit(X_treino, y_treino)
+
+        y_pred = pipe.predict(X_teste)
+
+        report = classification_report(y_teste, y_pred)
+        print('Relatório de Classificação\n', report)
+
+        resultados.append([modelo, {'modelo': name, 'previsoes': y_pred, 'report': report}])
+    
+    return resultados
